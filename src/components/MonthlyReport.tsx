@@ -26,77 +26,107 @@ export const MonthlyReport: React.FC<MonthlyReportProps> = ({ className }) => {
   };
 
   return (
-    <Card className={cn(
-      "relative overflow-hidden bg-gradient-card backdrop-blur-sm border-border/50",
-      className
-    )}>
-      <div className="p-6 space-y-6">
+    <div className="space-y-6">
+      {/* Colorful Monthly Header */}
+      <Card className={cn(
+        "relative overflow-hidden bg-gradient-monthly backdrop-blur-sm border-border/50",
+        "shadow-glow hover:shadow-vital transition-smooth",
+        className
+      )}>
+        <div className="absolute inset-0 bg-gradient-rainbow opacity-15" />
+        <div className="relative p-6 space-y-6">
         <div className="flex items-center justify-between">
-          <h3 className="text-xl font-bold text-foreground">
-            Monthly Report
-          </h3>
-          <div className="text-sm text-muted-foreground">
-            {getCurrentMonth()}
+          <div className="flex items-center space-x-4">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-health flex items-center justify-center shadow-glow">
+              <span className="text-3xl">📊</span>
+            </div>
+            <div>
+              <h3 className="text-2xl font-bold text-foreground">
+                Monthly Health Report
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Comprehensive analysis • {getCurrentMonth()}
+              </p>
+            </div>
+          </div>
+          <div className="text-right">
+            <div className="text-lg font-bold text-primary">
+              {getCurrentMonth()}
+            </div>
+            <div className="text-xs text-muted-foreground">
+              Full Month Analysis
+            </div>
           </div>
         </div>
 
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="trends">Trends</TabsTrigger>
-            <TabsTrigger value="insights">Insights</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-3 bg-gradient-to-r from-analysis-purple/10 to-analysis-blue/10 border border-analysis-purple/20">
+            <TabsTrigger value="overview" className="data-[state=active]:bg-analysis-purple/20 data-[state=active]:text-analysis-purple">📈 Overview</TabsTrigger>
+            <TabsTrigger value="trends" className="data-[state=active]:bg-analysis-blue/20 data-[state=active]:text-analysis-blue">📊 Trends</TabsTrigger>
+            <TabsTrigger value="insights" className="data-[state=active]:bg-analysis-green/20 data-[state=active]:text-analysis-green">💡 Insights</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="overview" className="space-y-4">
-            {/* Monthly Summary Cards */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 rounded-lg bg-gradient-health/10 border border-primary/20">
-                <div className="text-center space-y-2">
-                  <div className="text-3xl font-bold text-primary">
+          <TabsContent value="overview" className="space-y-6">
+            {/* Vibrant Monthly Summary Cards */}
+            <div className="grid grid-cols-2 gap-6">
+              <div className="relative overflow-hidden p-6 rounded-2xl bg-gradient-to-br from-analysis-purple/20 to-analysis-blue/20 border border-analysis-purple/30 shadow-vital">
+                <div className="absolute top-3 right-3 text-3xl opacity-60">💓</div>
+                <div className="absolute inset-0 bg-gradient-to-br from-analysis-purple/5 to-transparent" />
+                <div className="relative text-center space-y-3">
+                  <div className="text-4xl font-bold text-analysis-purple">
                     {monthlyData.summary.averageHeartRate}
                   </div>
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-sm font-medium text-foreground">
                     Average Heart Rate
                   </div>
-                  <div className="text-xs text-health-good">
-                    Within normal range
+                  <div className="text-xs text-health-good font-medium">
+                    ✓ Within normal range
                   </div>
                 </div>
               </div>
 
-              <div className="p-4 rounded-lg bg-gradient-warning/10 border border-health-warning/20">
-                <div className="text-center space-y-2">
-                  <div className="text-3xl font-bold text-health-warning">
+              <div className="relative overflow-hidden p-6 rounded-2xl bg-gradient-to-br from-analysis-orange/20 to-analysis-red/20 border border-analysis-orange/30 shadow-vital">
+                <div className="absolute top-3 right-3 text-3xl opacity-60">🔥</div>
+                <div className="absolute inset-0 bg-gradient-to-br from-analysis-orange/5 to-transparent" />
+                <div className="relative text-center space-y-3">
+                  <div className="text-4xl font-bold text-analysis-orange">
                     {monthlyData.summary.totalStressEpisodes}
                   </div>
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-sm font-medium text-foreground">
                     Total Stress Episodes
                   </div>
-                  <div className="text-xs text-health-warning">
-                    Monitor triggers
+                  <div className="text-xs text-health-warning font-medium">
+                    ⚠ Monitor triggers
                   </div>
                 </div>
               </div>
 
-              <div className="p-4 rounded-lg bg-primary/10 border border-primary/20 col-span-2">
-                <div className="text-center space-y-2">
-                  <div className="text-4xl font-bold text-primary">
+              <div className="relative overflow-hidden p-6 rounded-2xl bg-gradient-to-br from-analysis-cyan/20 to-analysis-green/20 border border-analysis-cyan/30 shadow-vital col-span-2">
+                <div className="absolute top-3 right-3 text-4xl opacity-60">🎯</div>
+                <div className="absolute inset-0 bg-gradient-to-br from-analysis-cyan/5 to-transparent" />
+                <div className="relative text-center space-y-4">
+                  <div className="text-5xl font-bold text-analysis-cyan">
                     {monthlyData.summary.averageTicFrequency}
                   </div>
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-base font-medium text-foreground">
                     Average Tics per Day
                   </div>
-                  <div className="text-xs text-health-good">
-                    Consistent with baseline
+                  <div className="text-sm text-health-good font-medium">
+                    ✅ Consistent with baseline patterns
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Weekly Breakdown */}
-            <div className="space-y-3">
-              <h4 className="font-medium text-foreground">Weekly Breakdown</h4>
-              <div className="space-y-2">
+            {/* Colorful Weekly Breakdown */}
+            <div className="space-y-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-rainbow flex items-center justify-center">
+                  <span className="text-white font-bold">📅</span>
+                </div>
+                <h4 className="text-lg font-bold text-foreground">Weekly Breakdown</h4>
+              </div>
+              <div className="grid gap-4">
                 {monthlyData.weeks.map((week, index) => {
                   const weekAvg = {
                     heartRate: Math.round(
@@ -108,28 +138,46 @@ export const MonthlyReport: React.FC<MonthlyReportProps> = ({ className }) => {
                     )
                   };
 
+                  
+                  const weekColors = [
+                    'from-analysis-purple/20 to-analysis-blue/20 border-analysis-purple/30',
+                    'from-analysis-blue/20 to-analysis-cyan/20 border-analysis-blue/30', 
+                    'from-analysis-cyan/20 to-analysis-green/20 border-analysis-cyan/30',
+                    'from-analysis-green/20 to-analysis-yellow/20 border-analysis-green/30'
+                  ];
+                  const weekIcons = ['🌟', '💫', '✨', '⭐'];
+
                   return (
                     <div 
                       key={index}
-                      className="p-4 rounded-lg bg-secondary/30 border border-border/30"
+                      className={cn(
+                        "relative overflow-hidden p-5 rounded-xl border transition-smooth hover:scale-105",
+                        `bg-gradient-to-br ${weekColors[index]}`
+                      )}
                     >
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="font-medium">Week {index + 1}</span>
-                        <span className="text-sm text-muted-foreground">
+                      <div className="absolute top-3 right-3 text-2xl opacity-50">{weekIcons[index]}</div>
+                      <div className="relative flex items-center justify-between mb-3">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                            <span className="text-sm font-bold">W{index + 1}</span>
+                          </div>
+                          <span className="font-medium text-foreground">Week {index + 1}</span>
+                        </div>
+                        <span className="text-sm text-muted-foreground font-medium">
                           {new Date(week.weekStart).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - {new Date(week.weekEnd).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                         </span>
                       </div>
-                      <div className="grid grid-cols-3 gap-4 text-sm">
-                        <div className="text-center">
-                          <div className="font-medium text-vitals-heart">{weekAvg.heartRate}</div>
+                      <div className="relative grid grid-cols-3 gap-4">
+                        <div className="text-center p-3 rounded-lg bg-white/10 backdrop-blur-sm">
+                          <div className="text-lg font-bold text-vitals-heart">{weekAvg.heartRate}</div>
                           <div className="text-xs text-muted-foreground">Avg BPM</div>
                         </div>
-                        <div className="text-center">
-                          <div className="font-medium text-vitals-temperature">{weekAvg.stressEpisodes}</div>
+                        <div className="text-center p-3 rounded-lg bg-white/10 backdrop-blur-sm">
+                          <div className="text-lg font-bold text-vitals-temperature">{weekAvg.stressEpisodes}</div>
                           <div className="text-xs text-muted-foreground">Stress Episodes</div>
                         </div>
-                        <div className="text-center">
-                          <div className="font-medium text-vitals-pressure">{weekAvg.ticFrequency}</div>
+                        <div className="text-center p-3 rounded-lg bg-white/10 backdrop-blur-sm">
+                          <div className="text-lg font-bold text-vitals-pressure">{weekAvg.ticFrequency}</div>
                           <div className="text-xs text-muted-foreground">Avg Tics</div>
                         </div>
                       </div>
@@ -228,15 +276,18 @@ export const MonthlyReport: React.FC<MonthlyReportProps> = ({ className }) => {
           </TabsContent>
         </Tabs>
 
-        <div className="flex space-x-2">
-          <Button variant="outline" size="sm" className="flex-1">
+        <div className="flex space-x-3">
+          <Button variant="outline" size="sm" className="flex-1 border-analysis-purple/30 hover:bg-analysis-purple/10">
+            <span className="mr-2">📥</span>
             Download PDF
           </Button>
-          <Button variant="default" size="sm" className="flex-1">
+          <Button variant="default" size="sm" className="flex-1 bg-gradient-health border-0">
+            <span className="mr-2">👨‍⚕️</span>
             Share with Doctor
           </Button>
         </div>
-      </div>
-    </Card>
+        </div>
+      </Card>
+    </div>
   );
 };

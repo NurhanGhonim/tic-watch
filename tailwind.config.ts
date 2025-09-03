@@ -77,13 +77,34 @@ export default {
 					low: 'hsl(var(--stress-low))',
 					medium: 'hsl(var(--stress-medium))',
 					high: 'hsl(var(--stress-high))'
+				},
+				trend: {
+					improving: 'hsl(var(--trend-improving))',
+					stable: 'hsl(var(--trend-stable))',
+					declining: 'hsl(var(--trend-declining))'
+				},
+				analysis: {
+					purple: 'hsl(var(--analysis-purple))',
+					blue: 'hsl(var(--analysis-blue))',
+					cyan: 'hsl(var(--analysis-cyan))',
+					green: 'hsl(var(--analysis-green))',
+					yellow: 'hsl(var(--analysis-yellow))',
+					orange: 'hsl(var(--analysis-orange))',
+					red: 'hsl(var(--analysis-red))'
 				}
 			},
 			backgroundImage: {
 				'gradient-health': 'var(--gradient-health)',
 				'gradient-warning': 'var(--gradient-warning)',
 				'gradient-card': 'var(--gradient-card)',
-				'gradient-vital': 'var(--gradient-vital)'
+				'gradient-vital': 'var(--gradient-vital)',
+				'gradient-rainbow': 'var(--gradient-rainbow)',
+				'gradient-weekly': 'var(--gradient-weekly)',
+				'gradient-monthly': 'var(--gradient-monthly)',
+				'week-1': 'var(--week-gradient-1)',
+				'week-2': 'var(--week-gradient-2)',
+				'week-3': 'var(--week-gradient-3)',
+				'week-4': 'var(--week-gradient-4)'
 			},
 			boxShadow: {
 				'glow': 'var(--shadow-glow)',
