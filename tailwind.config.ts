@@ -61,7 +61,38 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				health: {
+					excellent: 'hsl(var(--health-excellent))',
+					good: 'hsl(var(--health-good))',
+					warning: 'hsl(var(--health-warning))',
+					danger: 'hsl(var(--health-danger))'
+				},
+				vitals: {
+					heart: 'hsl(var(--heart-rate))',
+					temperature: 'hsl(var(--temperature))',
+					pressure: 'hsl(var(--pressure))'
+				},
+				stress: {
+					low: 'hsl(var(--stress-low))',
+					medium: 'hsl(var(--stress-medium))',
+					high: 'hsl(var(--stress-high))'
 				}
+			},
+			backgroundImage: {
+				'gradient-health': 'var(--gradient-health)',
+				'gradient-warning': 'var(--gradient-warning)',
+				'gradient-card': 'var(--gradient-card)',
+				'gradient-vital': 'var(--gradient-vital)'
+			},
+			boxShadow: {
+				'glow': 'var(--shadow-glow)',
+				'card': 'var(--shadow-card)',
+				'vital': 'var(--shadow-vital)'
+			},
+			transitionTimingFunction: {
+				'smooth': 'var(--transition-smooth)',
+				'bounce': 'var(--transition-bounce)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
