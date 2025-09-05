@@ -173,7 +173,13 @@ const Index = () => {
             <div className="p-6 rounded-xl bg-gradient-card border border-border/50">
               <h3 className="text-lg font-semibold mb-4">Current Health Status</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="text-center p-4 rounded-lg bg-secondary/30">
+                <button 
+                  className="text-center p-4 rounded-lg bg-secondary/30 hover:bg-secondary/50 transition-smooth hover:scale-105 cursor-pointer border border-transparent hover:border-primary/30"
+                  onClick={() => {
+                    const statusDetails = `Detailed Health Status Report:\n\n• Heart Rate: ${vitals.heartRate} BPM ${getVitalStatus('heartRate', vitals.heartRate)}\n• Temperature: ${vitals.temperature}°C ${getVitalStatus('temperature', vitals.temperature)}\n• Blood Pressure: ${vitals.bloodPressureSystolic}/${vitals.bloodPressureDiastolic} mmHg ${getVitalStatus('pressure', vitals.bloodPressureSystolic)}\n• Stress Level: ${vitals.stressLevel}\n• Overall Health Score: ${stressPercentage < 30 ? 'Excellent' : stressPercentage < 60 ? 'Good' : 'Needs Attention'}\n\nGenerated: ${vitals.timestamp.toLocaleString()}`;
+                    alert(statusDetails);
+                  }}
+                >
                   <div className="text-2xl mb-2">
                     {vitals.stressLevel === 'low' ? '😌' : vitals.stressLevel === 'medium' ? '😐' : '😰'}
                   </div>
@@ -181,23 +187,44 @@ const Index = () => {
                   <div className="text-sm text-muted-foreground capitalize">
                     {vitals.stressLevel} stress level
                   </div>
-                </div>
+                  <div className="text-xs text-primary mt-1">Click for details</div>
+                </button>
                 
-                <div className="text-center p-4 rounded-lg bg-secondary/30">
+                <button 
+                  className="text-center p-4 rounded-lg bg-secondary/30 hover:bg-secondary/50 transition-smooth hover:scale-105 cursor-pointer border border-transparent hover:border-primary/30"
+                  onClick={() => {
+                    setIsMonitoring(!isMonitoring);
+                    const status = !isMonitoring ? 'enabled' : 'paused';
+                    alert(`Monitoring ${status}!\n\n${!isMonitoring ? '✅ Real-time health tracking is now active' : '⏸️ Health monitoring has been paused'}\n\nYou can toggle this anytime from the header or this card.`);
+                  }}
+                >
                   <div className="text-2xl mb-2">📊</div>
                   <div className="font-medium">Monitoring</div>
                   <div className="text-sm text-muted-foreground">
-                    Real-time tracking active
+                    {isMonitoring ? 'Real-time tracking active' : 'Monitoring paused'}
                   </div>
-                </div>
+                  <div className="text-xs text-primary mt-1">Click to toggle</div>
+                </button>
                 
-                <div className="text-center p-4 rounded-lg bg-secondary/30">
+                <button 
+                  className="text-center p-4 rounded-lg bg-secondary/30 hover:bg-secondary/50 transition-smooth hover:scale-105 cursor-pointer border border-transparent hover:border-primary/30"
+                  onClick={() => {
+                    const recommendations = vitals.stressLevel === 'high' 
+                      ? `🔴 HIGH STRESS RECOMMENDATIONS:\n\n1. 🧘 Take 5 deep breaths (4 sec in, 6 sec out)\n2. 💧 Drink a glass of water\n3. 🎵 Listen to calming music\n4. 🚶 Take a short 5-minute walk\n5. 📱 Use a meditation app\n6. 🤝 Reach out to your support system\n\n⚠️ If symptoms persist, consult your healthcare provider.`
+                      : vitals.stressLevel === 'medium'
+                      ? `🟡 MEDIUM STRESS RECOMMENDATIONS:\n\n1. 🧘 Practice mindfulness for 2-3 minutes\n2. 🌱 Do some light stretching\n3. 📖 Read something positive\n4. ☕ Take a break with your favorite beverage\n5. 🎯 Focus on one task at a time\n\n✅ You're managing well! Keep up the good habits.`
+                      : `🟢 LOW STRESS - MAINTAINING WELLNESS:\n\n1. ✨ Continue your current routine\n2. 💪 Consider light exercise\n3. 🎨 Engage in a hobby you enjoy\n4. 🤝 Connect with friends or family\n5. 📚 Learn something new\n6. 🌟 Practice gratitude\n\n🎉 Excellent! Your stress levels are well-managed.`;
+                    
+                    alert(recommendations);
+                  }}
+                >
                   <div className="text-2xl mb-2">🎯</div>
                   <div className="font-medium">Recommendations</div>
                   <div className="text-sm text-muted-foreground">
                     {vitals.stressLevel === 'high' ? 'Take deep breaths' : 'Keep up the good work'}
                   </div>
-                </div>
+                  <div className="text-xs text-primary mt-1">Click for tips</div>
+                </button>
               </div>
             </div>
           </TabsContent>
