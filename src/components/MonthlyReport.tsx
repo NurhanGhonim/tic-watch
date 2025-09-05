@@ -277,11 +277,50 @@ export const MonthlyReport: React.FC<MonthlyReportProps> = ({ className }) => {
         </Tabs>
 
         <div className="flex space-x-3">
-          <Button variant="outline" size="sm" className="flex-1 border-analysis-purple/30 hover:bg-analysis-purple/10">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="flex-1 border-analysis-purple/30 hover:bg-analysis-purple/10"
+            onClick={() => {
+              const reportData = {
+                month: getCurrentMonth(),
+                summary: monthlyData.summary,
+                weeks: monthlyData.weeks,
+                generatedAt: new Date().toISOString()
+              };
+              
+              const jsonStr = JSON.stringify(reportData, null, 2);
+              const blob = new Blob([jsonStr], { type: 'application/json' });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = `monthly-health-report-${new Date().toISOString().split('T')[0]}.json`;
+              a.click();
+              URL.revokeObjectURL(url);
+            }}
+          >
             <span className="mr-2">📥</span>
-            Download PDF
+            Download Report
           </Button>
-          <Button variant="default" size="sm" className="flex-1 bg-gradient-health border-0">
+          <Button 
+            variant="default" 
+            size="sm" 
+            className="flex-1 bg-gradient-health border-0"
+            onClick={() => {
+              const reportText = `Tourette Syndrome Health Report - ${getCurrentMonth()}\n\nSummary:\n- Average Heart Rate: ${monthlyData.summary.averageHeartRate} BPM\n- Total Stress Episodes: ${monthlyData.summary.totalStressEpisodes}\n- Average Tics per Day: ${monthlyData.summary.averageTicFrequency}\n\nGenerated: ${new Date().toLocaleDateString()}`;
+              
+              if (navigator.share) {
+                navigator.share({
+                  title: 'Monthly Health Report',
+                  text: reportText,
+                });
+              } else {
+                navigator.clipboard.writeText(reportText).then(() => {
+                  alert('Report copied to clipboard! You can now share it with your doctor.');
+                });
+              }
+            }}
+          >
             <span className="mr-2">👨‍⚕️</span>
             Share with Doctor
           </Button>

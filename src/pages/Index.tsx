@@ -7,6 +7,7 @@ import { WatchControl } from '@/components/WatchControl';
 import { DailyAnalysis } from '@/components/DailyAnalysis';
 import { WeeklyTrends } from '@/components/WeeklyTrends';
 import { MonthlyReport } from '@/components/MonthlyReport';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { 
   generateVitalSigns, 
   generateDailyAnalysis, 
@@ -47,8 +48,8 @@ const Index = () => {
     else if (vitals.bloodPressureSystolic > 130) stress += 20;
     
     // Temperature factor
-    if (vitals.temperature > 100) stress += 25;
-    else if (vitals.temperature > 99.5) stress += 15;
+    if (vitals.temperature > 38) stress += 25;
+    else if (vitals.temperature > 37.5) stress += 15;
     
     return Math.min(100, stress);
   };
@@ -64,9 +65,9 @@ const Index = () => {
         return 'danger';
       
       case 'temperature':
-        if (value >= 97.8 && value <= 99.1) return 'excellent';
-        if (value >= 97 && value <= 100) return 'good';
-        if (value >= 96 && value <= 101) return 'warning';
+        if (value >= 36.5 && value <= 37.2) return 'excellent';
+        if (value >= 36 && value <= 37.5) return 'good';
+        if (value >= 35.5 && value <= 38) return 'warning';
         return 'danger';
       
       case 'pressure':
@@ -96,6 +97,7 @@ const Index = () => {
               </div>
             </div>
             <div className="flex items-center space-x-2">
+              <ThemeToggle />
               <div className={`w-3 h-3 rounded-full ${isMonitoring ? 'bg-health-excellent animate-pulse' : 'bg-muted'}`} />
               <span className="text-sm text-muted-foreground">
                 {isMonitoring ? 'Live Monitoring' : 'Paused'}
@@ -130,10 +132,10 @@ const Index = () => {
               <VitalCard
                 title="Temperature"
                 value={vitals.temperature}
-                unit="°F"
+                unit="°C"
                 status={getVitalStatus('temperature', vitals.temperature)}
                 icon="🌡️"
-                trend={vitals.temperature > 99 ? 'up' : vitals.temperature < 98 ? 'down' : 'stable'}
+                trend={vitals.temperature > 37.5 ? 'up' : vitals.temperature < 36.5 ? 'down' : 'stable'}
               />
               
               <VitalCard

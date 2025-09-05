@@ -123,6 +123,21 @@ export const WatchControl: React.FC<WatchControlProps> = ({ className }) => {
               variant="outline"
               size="sm"
               className="h-12 flex flex-col items-center justify-center space-y-1"
+              onClick={() => {
+                // Simulate sync process
+                const originalText = document.querySelector('[data-sync-btn] span:last-child')?.textContent;
+                const syncBtn = document.querySelector('[data-sync-btn] span:last-child');
+                if (syncBtn) {
+                  syncBtn.textContent = 'Syncing...';
+                  setTimeout(() => {
+                    syncBtn.textContent = 'Synced!';
+                    setTimeout(() => {
+                      syncBtn.textContent = 'Sync';
+                    }, 1500);
+                  }, 2000);
+                }
+              }}
+              data-sync-btn
             >
               <span className="text-lg">🔄</span>
               <span className="text-xs">Sync</span>
@@ -131,6 +146,9 @@ export const WatchControl: React.FC<WatchControlProps> = ({ className }) => {
               variant="outline"
               size="sm"
               className="h-12 flex flex-col items-center justify-center space-y-1"
+              onClick={() => {
+                alert('Settings:\n\n• Monitoring Interval: 3 seconds\n• Auto-close sensitivity: Medium\n• Heart rate alerts: Enabled\n• Stress notifications: On\n• Data backup: Cloud enabled');
+              }}
             >
               <span className="text-lg">⚙️</span>
               <span className="text-xs">Settings</span>

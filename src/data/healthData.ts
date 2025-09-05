@@ -36,8 +36,8 @@ export const generateVitalSigns = (): VitalSigns => {
   const heartRateVariation = Math.random() * 30 - 15; // ±15 bpm variation
   const heartRate = Math.max(60, Math.min(120, baseHeartRate + heartRateVariation));
 
-  const baseTemp = 98.6;
-  const tempVariation = Math.random() * 2 - 1; // ±1°F variation
+  const baseTemp = 37; // 37°C normal body temp
+  const tempVariation = Math.random() * 2 - 1; // ±1°C variation
   const temperature = baseTemp + tempVariation;
 
   const baseSystolic = 120;
@@ -71,7 +71,7 @@ export const generateDailyAnalysis = (daysAgo: number): DailyAnalysis => {
   date.setDate(date.getDate() - daysAgo);
   
   const baseHeartRate = 75 + Math.random() * 10 - 5;
-  const baseTemp = 98.6 + Math.random() * 1 - 0.5;
+  const baseTemp = 37 + Math.random() * 1 - 0.5; // 36.5-37.5°C
   const baseSystolic = 120 + Math.random() * 15 - 7.5;
   const baseDiastolic = 80 + Math.random() * 10 - 5;
   

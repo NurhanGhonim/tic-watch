@@ -49,8 +49,35 @@ export const DailyAnalysis: React.FC<DailyAnalysisProps> = ({ data, className })
           <h3 className="text-lg font-semibold text-foreground">
             Daily Analysis
           </h3>
-          <Button variant="outline" size="sm">
-            Export Data
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={() => {
+              const csvData = data.map(day => ({
+                Date: day.date,
+                'Heart Rate': day.averageHeartRate,
+                'Temperature (°C)': day.averageTemperature,
+                'Blood Pressure': `${day.averagePressure.systolic}/${day.averagePressure.diastolic}`,
+                'Tic Frequency': day.ticFrequency,
+                'Stress Episodes': day.stressEpisodes,
+                'Overall Status': day.overallStatus
+              }));
+              
+              const csv = [
+                Object.keys(csvData[0]).join(','),
+                ...csvData.map(row => Object.values(row).join(','))
+              ].join('\n');
+              
+              const blob = new Blob([csv], { type: 'text/csv' });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = `daily-health-data-${new Date().toISOString().split('T')[0]}.csv`;
+              a.click();
+              URL.revokeObjectURL(url);
+            }}
+          >
+            📥 Export Data
           </Button>
         </div>
 
@@ -90,7 +117,7 @@ export const DailyAnalysis: React.FC<DailyAnalysisProps> = ({ data, className })
                 </div>
                 <div className="text-center">
                   <div className="text-vitals-temperature font-medium">
-                    {day.averageTemperature}°F
+                    {day.averageTemperature}°C
                   </div>
                   <div className="text-xs text-muted-foreground">Temp</div>
                 </div>
